@@ -1,6 +1,6 @@
 package ua.edu.lnu.schedulebuilder.exception;
 
-import javax.persistence.PersistenceException;
+import jakarta.persistence.PersistenceException;
 
 public class EntityAlreadyExistsException extends PersistenceException {
     private static final String ENTITY_ALREADY_EXISTS = "Such entity already exists";

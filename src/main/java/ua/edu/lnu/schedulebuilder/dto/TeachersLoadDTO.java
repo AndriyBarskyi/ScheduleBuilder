@@ -79,6 +79,7 @@ public class TeachersLoadDTO {
     @NotNull
     @NotEmpty
     private String teacherId;
-
+    @NotNull
+    @NotEmpty
     private String planId;
 }

@@ -60,5 +60,5 @@ public class PlanDTO {
     private String academicYearId;
     @NotNull
     @NotEmpty
-    private String department;
+    private String departmentId;
 }
