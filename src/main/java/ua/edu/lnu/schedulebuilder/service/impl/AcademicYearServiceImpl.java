@@ -12,7 +12,7 @@ import ua.edu.lnu.schedulebuilder.service.AcademicYearService;
 @Service
 public class AcademicYearServiceImpl implements AcademicYearService {
 
-    private static final String TEACHER_NOT_FOUND_BY_ID = "Academic year not found by id: ";
+    static final String ACADEMIC_YEAR_NOT_FOUND_BY_ID = "Academic year not found by id: ";
     private final AcademicYearRepository academicYearRepository;
     private final AcademicYearMapper academicYearMapper;
 
@@ -58,7 +58,7 @@ public class AcademicYearServiceImpl implements AcademicYearService {
 
     private void checkThatAcademicYearExists(String id) {
         if (!academicYearRepository.existsById(id)) {
-            throw new EntityNotExistsException(TEACHER_NOT_FOUND_BY_ID + id);
+            throw new EntityNotExistsException(ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
         }
     }
 }

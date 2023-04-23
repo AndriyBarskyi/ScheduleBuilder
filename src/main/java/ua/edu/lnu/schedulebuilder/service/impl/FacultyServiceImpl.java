@@ -12,7 +12,7 @@ import ua.edu.lnu.schedulebuilder.service.FacultyService;
 @Service
 public class FacultyServiceImpl implements FacultyService {
 
-    private static final String FACULTY_NOT_FOUND_BY_ID = "Faculty not found by id: ";
+    static final String FACULTY_NOT_FOUND_BY_ID = "Faculty not found by id: ";
     private final FacultyRepository facultyRepository;
     private final FacultyMapper facultyMapper;
 

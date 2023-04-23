@@ -12,7 +12,7 @@ import ua.edu.lnu.schedulebuilder.service.TeacherService;
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
-    private static final String TEACHER_NOT_FOUND_BY_ID = "Teacher not found by id: ";
+    static final String TEACHER_NOT_FOUND_BY_ID = "Teacher not found by id: ";
     private final TeacherRepository teacherRepository;
     private final TeacherMapper teacherMapper;
 

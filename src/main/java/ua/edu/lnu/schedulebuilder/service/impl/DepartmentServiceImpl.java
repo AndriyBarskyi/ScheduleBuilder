@@ -7,19 +7,25 @@ import ua.edu.lnu.schedulebuilder.dto.DepartmentDTO;
 import ua.edu.lnu.schedulebuilder.exception.EntityNotExistsException;
 import ua.edu.lnu.schedulebuilder.mapper.DepartmentMapper;
 import ua.edu.lnu.schedulebuilder.repository.DepartmentRepository;
+import ua.edu.lnu.schedulebuilder.repository.FacultyRepository;
 import ua.edu.lnu.schedulebuilder.service.DepartmentService;
+
+import static ua.edu.lnu.schedulebuilder.service.impl.FacultyServiceImpl.FACULTY_NOT_FOUND_BY_ID;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private static final String DEPARTMENT_NOT_FOUND_BY_ID = "Department not found by id: ";
+    static final String DEPARTMENT_NOT_FOUND_BY_ID = "Department not found by id: ";
     private final DepartmentRepository departmentRepository;
+    private final FacultyRepository facultyRepository;
     private final DepartmentMapper departmentMapper;
 
     @Autowired
     public DepartmentServiceImpl(DepartmentRepository departmentRepository,
+        FacultyRepository facultyRepository,
         DepartmentMapper departmentMapper) {
         this.departmentRepository = departmentRepository;
+        this.facultyRepository = facultyRepository;
         this.departmentMapper = departmentMapper;
     }
 
@@ -39,6 +45,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentDTO updateDepartment(DepartmentDTO newDepartment, String id) {
         checkThatDepartmentExists(id);
+        checkThatFacultyExists(newDepartment.getFacultyId());
         return departmentRepository.findById(id)
             .map(department -> {
                 departmentMapper.updateDepartment(department, newDepartment);
@@ -49,6 +56,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDTO addNewDepartment(DepartmentDTO newDepartment) {
+        checkThatFacultyExists(newDepartment.getFacultyId());
         return departmentMapper.entityToDto(
             departmentRepository.save(
                 departmentMapper.dtoToEntity(newDepartment)
@@ -59,6 +67,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     private void checkThatDepartmentExists(String id) {
         if (!departmentRepository.existsById(id)) {
             throw new EntityNotExistsException(DEPARTMENT_NOT_FOUND_BY_ID + id);
+        }
+    }
+
+    private void checkThatFacultyExists(String id) {
+        if (!facultyRepository.existsById(id)) {
+            throw new EntityNotExistsException(
+                FACULTY_NOT_FOUND_BY_ID + id);
         }
     }
 }

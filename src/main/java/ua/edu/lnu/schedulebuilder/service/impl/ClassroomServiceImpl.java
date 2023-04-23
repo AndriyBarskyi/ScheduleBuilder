@@ -7,19 +7,26 @@ import ua.edu.lnu.schedulebuilder.dto.ClassroomDTO;
 import ua.edu.lnu.schedulebuilder.exception.EntityNotExistsException;
 import ua.edu.lnu.schedulebuilder.mapper.ClassroomMapper;
 import ua.edu.lnu.schedulebuilder.repository.ClassroomRepository;
+import ua.edu.lnu.schedulebuilder.repository.FacultyRepository;
 import ua.edu.lnu.schedulebuilder.service.ClassroomService;
+
+import static ua.edu.lnu.schedulebuilder.service.impl.FacultyServiceImpl.FACULTY_NOT_FOUND_BY_ID;
 
 @Service
 public class ClassroomServiceImpl implements ClassroomService {
 
-    private static final String CLASSROOM_NOT_FOUND_BY_ID = "Classroom not found by id: ";
+    static final String CLASSROOM_NOT_FOUND_BY_ID =
+        "Classroom not found by id: ";
     private final ClassroomRepository classroomRepository;
+    private final FacultyRepository facultyRepository;
     private final ClassroomMapper classroomMapper;
 
     @Autowired
     public ClassroomServiceImpl(ClassroomRepository classroomRepository,
-        ClassroomMapper classroomMapper) {
+        ClassroomMapper classroomMapper,
+        FacultyRepository facultyRepository) {
         this.classroomRepository = classroomRepository;
+        this.facultyRepository = facultyRepository;
         this.classroomMapper = classroomMapper;
     }
 
@@ -39,6 +46,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public ClassroomDTO updateClassroom(ClassroomDTO newClassroom, String id) {
         checkThatClassroomExists(id);
+        checkThatFacultyExists(newClassroom.getFacultyId());
         return classroomRepository.findById(id)
             .map(classroom -> {
                 classroomMapper.updateClassroom(classroom, newClassroom);
@@ -49,6 +57,7 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public ClassroomDTO addNewClassroom(ClassroomDTO newClassroom) {
+        checkThatFacultyExists(newClassroom.getFacultyId());
         return classroomMapper.entityToDto(
             classroomRepository.save(
                 classroomMapper.dtoToEntity(newClassroom)
@@ -59,6 +68,13 @@ public class ClassroomServiceImpl implements ClassroomService {
     private void checkThatClassroomExists(String id) {
         if (!classroomRepository.existsById(id)) {
             throw new EntityNotExistsException(CLASSROOM_NOT_FOUND_BY_ID + id);
+        }
+    }
+
+    private void checkThatFacultyExists(String id) {
+        if (!facultyRepository.existsById(id)) {
+            throw new EntityNotExistsException(
+                FACULTY_NOT_FOUND_BY_ID + id);
         }
     }
 }
