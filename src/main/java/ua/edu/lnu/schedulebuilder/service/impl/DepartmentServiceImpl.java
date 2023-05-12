@@ -15,7 +15,8 @@ import static ua.edu.lnu.schedulebuilder.service.impl.FacultyServiceImpl.FACULTY
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    static final String DEPARTMENT_NOT_FOUND_BY_ID = "Department not found by id: ";
+    static final String DEPARTMENT_NOT_FOUND_BY_ID =
+        "Department not found by id: ";
     private final DepartmentRepository departmentRepository;
     private final FacultyRepository facultyRepository;
     private final DepartmentMapper departmentMapper;
@@ -43,7 +44,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDTO updateDepartment(DepartmentDTO newDepartment, String id) {
+    public DepartmentDTO updateDepartment(DepartmentDTO newDepartment,
+        String id) {
         checkThatDepartmentExists(id);
         checkThatFacultyExists(newDepartment.getFacultyId());
         return departmentRepository.findById(id)

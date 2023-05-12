@@ -1,7 +1,5 @@
 package ua.edu.lnu.schedulebuilder.model;
 
-import java.math.BigDecimal;
-
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;

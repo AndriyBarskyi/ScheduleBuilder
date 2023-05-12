@@ -2,7 +2,6 @@ package ua.edu.lnu.schedulebuilder.dto;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;

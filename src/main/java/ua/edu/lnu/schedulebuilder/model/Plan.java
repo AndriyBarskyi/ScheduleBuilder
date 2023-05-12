@@ -63,5 +63,5 @@ public class Plan {
 
     @ManyToOne
     @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "fk_plan_department"))
-    private Department department;
+    private Department department; // todo faculty
 }

@@ -12,12 +12,14 @@ import ua.edu.lnu.schedulebuilder.service.AcademicYearService;
 @Service
 public class AcademicYearServiceImpl implements AcademicYearService {
 
-    static final String ACADEMIC_YEAR_NOT_FOUND_BY_ID = "Academic year not found by id: ";
+    static final String ACADEMIC_YEAR_NOT_FOUND_BY_ID =
+        "Academic year not found by id: ";
     private final AcademicYearRepository academicYearRepository;
     private final AcademicYearMapper academicYearMapper;
 
     @Autowired
-    public AcademicYearServiceImpl(AcademicYearRepository academicYearRepository,
+    public AcademicYearServiceImpl(
+        AcademicYearRepository academicYearRepository,
         AcademicYearMapper academicYearMapper) {
         this.academicYearRepository = academicYearRepository;
         this.academicYearMapper = academicYearMapper;
@@ -37,11 +39,13 @@ public class AcademicYearServiceImpl implements AcademicYearService {
     }
 
     @Override
-    public AcademicYearDTO updateAcademicYear(AcademicYearDTO newAcademicYear, String id) {
+    public AcademicYearDTO updateAcademicYear(AcademicYearDTO newAcademicYear,
+        String id) {
         checkThatAcademicYearExists(id);
         return academicYearRepository.findById(id)
             .map(academicYear -> {
-                academicYearMapper.updateAcademicYear(academicYear, newAcademicYear);
+                academicYearMapper.updateAcademicYear(academicYear,
+                    newAcademicYear);
                 return academicYearMapper.entityToDto(academicYearRepository
                     .save(academicYear));
             }).orElseThrow(EntityNotExistsException::new);
@@ -58,7 +62,8 @@ public class AcademicYearServiceImpl implements AcademicYearService {
 
     private void checkThatAcademicYearExists(String id) {
         if (!academicYearRepository.existsById(id)) {
-            throw new EntityNotExistsException(ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
+            throw new EntityNotExistsException(
+                ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
         }
     }
 }

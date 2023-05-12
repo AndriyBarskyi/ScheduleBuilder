@@ -1,6 +1,5 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,19 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import ua.edu.lnu.schedulebuilder.dto.AcademicYearDTO;
 import ua.edu.lnu.schedulebuilder.service.AcademicYearService;
 
 @RestController
 @RequestMapping("/api/v1/academicYears")
+@RequiredArgsConstructor
 public class AcademicYearController {
 
     private final AcademicYearService academicYearService;
-
-    @Autowired
-    public AcademicYearController(AcademicYearService academicYearService) {
-        this.academicYearService = academicYearService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<AcademicYearDTO> getAcademicYearById(

@@ -8,8 +8,10 @@ public interface TeacherDepartmentService {
 
     void deleteTeacherDepartment(String id);
 
-    TeacherDepartmentDTO updateTeacherDepartment(TeacherDepartmentDTO newTeacherDepartment,
+    TeacherDepartmentDTO updateTeacherDepartment(
+        TeacherDepartmentDTO newTeacherDepartment,
         String id);
 
-    TeacherDepartmentDTO addNewTeacherDepartment(TeacherDepartmentDTO newTeacherDepartment);
+    TeacherDepartmentDTO addNewTeacherDepartment(
+        TeacherDepartmentDTO newTeacherDepartment);
 }

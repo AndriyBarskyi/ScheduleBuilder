@@ -1,6 +1,5 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,19 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import ua.edu.lnu.schedulebuilder.dto.TeachersLoadDTO;
 import ua.edu.lnu.schedulebuilder.service.TeachersLoadService;
 
 @RestController
 @RequestMapping("/api/v1/teachers-loads")
+@RequiredArgsConstructor
 public class TeachersLoadController {
 
     private final TeachersLoadService teachersLoadService;
-
-    @Autowired
-    public TeachersLoadController(TeachersLoadService teachersLoadService) {
-        this.teachersLoadService = teachersLoadService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<TeachersLoadDTO> getTeachersLoadById(

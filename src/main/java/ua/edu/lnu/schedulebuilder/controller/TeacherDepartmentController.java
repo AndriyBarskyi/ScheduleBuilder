@@ -1,6 +1,5 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,19 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import ua.edu.lnu.schedulebuilder.dto.TeacherDepartmentDTO;
 import ua.edu.lnu.schedulebuilder.service.TeacherDepartmentService;
 
 @RestController
 @RequestMapping("/api/v1/teacher-departments")
+@RequiredArgsConstructor
 public class TeacherDepartmentController {
 
     private final TeacherDepartmentService teacherDepartmentService;
-
-    @Autowired
-    public TeacherDepartmentController(TeacherDepartmentService teacherDepartmentService) {
-        this.teacherDepartmentService = teacherDepartmentService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<TeacherDepartmentDTO> getTeacherDepartmentById(
@@ -38,11 +34,13 @@ public class TeacherDepartmentController {
     public ResponseEntity<TeacherDepartmentDTO> addNewTeacherDepartment(
         @RequestBody @Validated TeacherDepartmentDTO newTeacherDepartment) {
         return ResponseEntity.status(HttpStatus.OK).body(
-            teacherDepartmentService.addNewTeacherDepartment(newTeacherDepartment));
+            teacherDepartmentService.addNewTeacherDepartment(
+                newTeacherDepartment));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTeacherDepartment(@PathVariable String id) {
+    public ResponseEntity<Void> deleteTeacherDepartment(
+        @PathVariable String id) {
         teacherDepartmentService.deleteTeacherDepartment(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -52,6 +50,7 @@ public class TeacherDepartmentController {
         @RequestBody @Validated TeacherDepartmentDTO newTeacherDepartment,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
-            teacherDepartmentService.updateTeacherDepartment(newTeacherDepartment, id));
+            teacherDepartmentService.updateTeacherDepartment(
+                newTeacherDepartment, id));
     }
 }

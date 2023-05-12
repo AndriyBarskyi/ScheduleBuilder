@@ -1,7 +1,6 @@
 package ua.edu.lnu.schedulebuilder.exception.handler;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 

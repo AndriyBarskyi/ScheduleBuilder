@@ -85,7 +85,8 @@ public class PlanServiceImpl implements PlanService {
 
     private void checkThatAcademicYearExists(String id) {
         if (!academicYearRepository.existsById(id)) {
-            throw new EntityNotExistsException(ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
+            throw new EntityNotExistsException(
+                ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
         }
     }
 }

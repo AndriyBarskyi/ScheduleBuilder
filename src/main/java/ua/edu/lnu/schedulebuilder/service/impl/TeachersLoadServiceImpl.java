@@ -21,7 +21,8 @@ import static ua.edu.lnu.schedulebuilder.service.impl.TeacherServiceImpl.TEACHER
 @Service
 public class TeachersLoadServiceImpl implements TeachersLoadService {
 
-    static final String TEACHERS_LOAD_NOT_FOUND_BY_ID = "TeachersLoad not found by id: ";
+    static final String TEACHERS_LOAD_NOT_FOUND_BY_ID =
+        "TeachersLoad not found by id: ";
     private final TeachersLoadRepository teachersLoadRepository;
     private final AcademicYearRepository academicYearRepository;
     private final DepartmentRepository departmentRepository;
@@ -30,7 +31,8 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
     private final TeachersLoadMapper teachersLoadMapper;
 
     @Autowired
-    public TeachersLoadServiceImpl(TeachersLoadRepository teachersLoadRepository,
+    public TeachersLoadServiceImpl(
+        TeachersLoadRepository teachersLoadRepository,
         AcademicYearRepository academicYearRepository,
         DepartmentRepository departmentRepository,
         TeacherRepository teacherRepository,
@@ -58,7 +60,8 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
     }
 
     @Override
-    public TeachersLoadDTO updateTeachersLoad(TeachersLoadDTO newTeachersLoad, String id) {
+    public TeachersLoadDTO updateTeachersLoad(TeachersLoadDTO newTeachersLoad,
+        String id) {
         checkThatTeachersLoadExists(id);
         checkThatAcademicYearExists(newTeachersLoad.getAcademicYearId());
         checkThatDepartmentExists(newTeachersLoad.getDepartmentId());
@@ -66,7 +69,8 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
         checkThatPlanExists(newTeachersLoad.getPlanId());
         return teachersLoadRepository.findById(id)
             .map(teachersLoad -> {
-                teachersLoadMapper.updateTeachersLoad(teachersLoad, newTeachersLoad);
+                teachersLoadMapper.updateTeachersLoad(teachersLoad,
+                    newTeachersLoad);
                 return teachersLoadMapper.entityToDto(teachersLoadRepository
                     .save(teachersLoad));
             }).orElseThrow(EntityNotExistsException::new);
@@ -87,7 +91,8 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
 
     private void checkThatTeachersLoadExists(String id) {
         if (!teachersLoadRepository.existsById(id)) {
-            throw new EntityNotExistsException(TEACHERS_LOAD_NOT_FOUND_BY_ID + id);
+            throw new EntityNotExistsException(
+                TEACHERS_LOAD_NOT_FOUND_BY_ID + id);
         }
     }
 
@@ -99,7 +104,8 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
 
     private void checkThatAcademicYearExists(String id) {
         if (!academicYearRepository.existsById(id)) {
-            throw new EntityNotExistsException(ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
+            throw new EntityNotExistsException(
+                ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
         }
     }
 

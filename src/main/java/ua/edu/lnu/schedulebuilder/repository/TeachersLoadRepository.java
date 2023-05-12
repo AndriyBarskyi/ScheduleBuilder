@@ -2,8 +2,8 @@ package ua.edu.lnu.schedulebuilder.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ua.edu.lnu.schedulebuilder.model.Teacher;
 import ua.edu.lnu.schedulebuilder.model.TeachersLoad;
 
-public interface TeachersLoadRepository extends JpaRepository<TeachersLoad, String> {
+public interface TeachersLoadRepository
+    extends JpaRepository<TeachersLoad, String> {
 }

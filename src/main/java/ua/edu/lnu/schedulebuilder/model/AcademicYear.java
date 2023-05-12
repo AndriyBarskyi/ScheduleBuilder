@@ -1,6 +1,5 @@
 package ua.edu.lnu.schedulebuilder.model;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.GenericGenerator;

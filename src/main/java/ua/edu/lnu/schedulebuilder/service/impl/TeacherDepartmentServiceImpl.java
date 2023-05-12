@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ua.edu.lnu.schedulebuilder.dto.TeacherDepartmentDTO;
 import ua.edu.lnu.schedulebuilder.exception.EntityNotExistsException;
 import ua.edu.lnu.schedulebuilder.mapper.TeacherDepartmentMapper;
-import ua.edu.lnu.schedulebuilder.model.Department;
 import ua.edu.lnu.schedulebuilder.repository.DepartmentRepository;
 import ua.edu.lnu.schedulebuilder.repository.TeacherDepartmentRepository;
 import ua.edu.lnu.schedulebuilder.repository.TeacherRepository;
