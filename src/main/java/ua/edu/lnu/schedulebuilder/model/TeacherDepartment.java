@@ -2,14 +2,15 @@ package ua.edu.lnu.schedulebuilder.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,13 +30,16 @@ public class TeacherDepartment {
     private String id;
 
     @Column(nullable = false)
-    private Double rate;
+    private Double budgetRate;
 
-    @ManyToOne
+    @Column(nullable = false)
+    private Double extraRate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id", foreignKey = @ForeignKey(name = "fk_d_teacher"))
     private Teacher teacher;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "fk_t_department"))
     private Department department;
 }

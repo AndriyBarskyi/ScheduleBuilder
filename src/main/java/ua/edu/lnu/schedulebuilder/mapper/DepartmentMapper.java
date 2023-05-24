@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,4 +22,6 @@ public interface DepartmentMapper {
     @Mapping(target = "faculty.id", source = "facultyId")
     void updateDepartment(@MappingTarget Department teacherFromDB,
         DepartmentDTO newDepartment);
+
+    List<DepartmentDTO> entitiesToDtos(List<Department> departments);
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherDepartmentDTO {
+public class TeacherDepartmentSaveDTO {
     private String id;
 
     @NotNull
@@ -22,8 +22,8 @@ public class TeacherDepartmentDTO {
     private Double extraRate;
     @NotNull
     @NotEmpty
-    private TeacherDTO teacherDTO;
+    private String teacherId;
     @NotNull
     @NotEmpty
-    private DepartmentDTO departmentDTO;
+    private String departmentId;
 }

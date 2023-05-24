@@ -1,6 +1,6 @@
 package ua.edu.lnu.schedulebuilder.exception;
 
-import jakarta.persistence.PersistenceException;
+import javax.persistence.PersistenceException;
 
 public class EntityNotExistsException extends PersistenceException {
     private static final String ENTITY_NOT_EXISTS = "Unable to find entity.";

@@ -14,15 +14,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -43,15 +43,6 @@ public class User implements UserDetails {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
-
-    @Column(name = "first_name", nullable = false)
-    @NameConstraint
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    @NameConstraint
-    private String lastName;
-
     @Column(name = "email", nullable = false, unique = true)
     @EmailConstraint
     private String email;
@@ -62,19 +53,6 @@ public class User implements UserDetails {
 
     @Column(name = "password", nullable = false)
     private String password;
-
-    @Column(name = "is_active")
-    private Boolean isActive;
-
-    @CreatedDate
-    @Column(name = "create_date_time", nullable = false)
-    private LocalDateTime createDateTime;
-    @LastModifiedDate
-    @Column(name = "update_date_time")
-    private LocalDateTime updateDateTime;
-
-    @Column(name = "password_reset_token")
-    private String passwordResetToken;
 
     @Override public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

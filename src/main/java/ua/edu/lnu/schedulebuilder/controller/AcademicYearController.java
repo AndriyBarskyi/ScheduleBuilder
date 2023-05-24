@@ -2,6 +2,7 @@ package ua.edu.lnu.schedulebuilder.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class AcademicYearController {
 
     private final AcademicYearService academicYearService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<AcademicYearDTO> getAcademicYearById(
         @PathVariable String id) {
@@ -30,6 +32,7 @@ public class AcademicYearController {
             academicYearService.getAcademicYearById(id));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<AcademicYearDTO> addNewAcademicYear(
         @RequestBody @Validated AcademicYearDTO newAcademicYear) {
@@ -37,14 +40,16 @@ public class AcademicYearController {
             academicYearService.addNewAcademicYear(newAcademicYear));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAcademicYear(@PathVariable String id) {
         academicYearService.deleteAcademicYear(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<AcademicYearDTO> updateFootballer(
+    public ResponseEntity<AcademicYearDTO> updateAcademicYear(
         @RequestBody @Validated AcademicYearDTO newAcademicYear,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(

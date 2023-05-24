@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,12 @@ public class TeacherServiceImpl implements TeacherService {
                 teacherMapper.dtoToEntity(newTeacher)
             )
         );
+    }
+
+    @Override
+    public List<TeacherDTO> getAllTeachersByDepartmentId(String departmentId) {
+        return teacherMapper.entitiesToDtos(
+            teacherRepository.findAllByDepartmentId(departmentId));
     }
 
     private void checkThatTeacherExists(String id) {

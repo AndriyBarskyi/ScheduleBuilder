@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,13 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.departmentRepository = departmentRepository;
         this.facultyRepository = facultyRepository;
         this.departmentMapper = departmentMapper;
+    }
+
+    @Override
+    public List<DepartmentDTO> getAllDepartmentsByFacultyId(String facultyId) {
+        checkThatFacultyExists(facultyId);
+        return departmentMapper.entitiesToDtos(
+            departmentRepository.findAllByFacultyId(facultyId));
     }
 
     @Override

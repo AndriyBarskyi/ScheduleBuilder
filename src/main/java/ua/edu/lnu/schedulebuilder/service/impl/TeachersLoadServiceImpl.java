@@ -66,7 +66,6 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
         checkThatAcademicYearExists(newTeachersLoad.getAcademicYearId());
         checkThatDepartmentExists(newTeachersLoad.getDepartmentId());
         checkThatTeacherExists(newTeachersLoad.getTeacherId());
-        checkThatPlanExists(newTeachersLoad.getPlanId());
         return teachersLoadRepository.findById(id)
             .map(teachersLoad -> {
                 teachersLoadMapper.updateTeachersLoad(teachersLoad,
@@ -81,12 +80,20 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
         checkThatAcademicYearExists(newTeachersLoad.getAcademicYearId());
         checkThatDepartmentExists(newTeachersLoad.getDepartmentId());
         checkThatTeacherExists(newTeachersLoad.getTeacherId());
-        checkThatPlanExists(newTeachersLoad.getPlanId());
         return teachersLoadMapper.entityToDto(
             teachersLoadRepository.save(
                 teachersLoadMapper.dtoToEntity(newTeachersLoad)
             )
         );
+    }
+
+    @Override
+    public TeachersLoadDTO getTeachersLoadByFacultyIdAndTeacherIdAndAcademicYearId(
+        String departmentId, String teacherId,
+        String academicYearId) {
+        return teachersLoadMapper.entityToDto(
+            teachersLoadRepository.findByDepartmentIdAndTeacherIdAndAcademicYearId(
+                departmentId, teacherId, academicYearId));
     }
 
     private void checkThatTeachersLoadExists(String id) {
@@ -106,12 +113,6 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
         if (!academicYearRepository.existsById(id)) {
             throw new EntityNotExistsException(
                 ACADEMIC_YEAR_NOT_FOUND_BY_ID + id);
-        }
-    }
-
-    private void checkThatPlanExists(String id) {
-        if (!planRepository.existsById(id)) {
-            throw new EntityNotExistsException(PLAN_NOT_FOUND_BY_ID + id);
         }
     }
 

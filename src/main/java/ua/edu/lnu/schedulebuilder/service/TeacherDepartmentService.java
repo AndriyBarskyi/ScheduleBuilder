@@ -1,6 +1,9 @@
 package ua.edu.lnu.schedulebuilder.service;
 
+import java.util.List;
+
 import ua.edu.lnu.schedulebuilder.dto.TeacherDepartmentDTO;
+import ua.edu.lnu.schedulebuilder.dto.TeacherDepartmentSaveDTO;
 
 public interface TeacherDepartmentService {
 
@@ -12,6 +15,8 @@ public interface TeacherDepartmentService {
         TeacherDepartmentDTO newTeacherDepartment,
         String id);
 
-    TeacherDepartmentDTO addNewTeacherDepartment(
-        TeacherDepartmentDTO newTeacherDepartment);
+    TeacherDepartmentSaveDTO addNewTeacherDepartment(
+        TeacherDepartmentSaveDTO newTeacherDepartment);
+
+    List<TeacherDepartmentDTO> getAllTeacherDepartments();
 }

@@ -1,7 +1,10 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import ua.edu.lnu.schedulebuilder.dto.TeacherDepartmentDTO;
+import ua.edu.lnu.schedulebuilder.dto.TeacherDepartmentSaveDTO;
 import ua.edu.lnu.schedulebuilder.service.TeacherDepartmentService;
 
 @RestController
@@ -23,6 +27,7 @@ public class TeacherDepartmentController {
 
     private final TeacherDepartmentService teacherDepartmentService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<TeacherDepartmentDTO> getTeacherDepartmentById(
         @PathVariable String id) {
@@ -30,14 +35,16 @@ public class TeacherDepartmentController {
             teacherDepartmentService.getTeacherDepartmentById(id));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
-    public ResponseEntity<TeacherDepartmentDTO> addNewTeacherDepartment(
-        @RequestBody @Validated TeacherDepartmentDTO newTeacherDepartment) {
+    public ResponseEntity<TeacherDepartmentSaveDTO> addNewTeacherDepartment(
+        @RequestBody @Validated TeacherDepartmentSaveDTO newTeacherDepartment) {
         return ResponseEntity.status(HttpStatus.OK).body(
             teacherDepartmentService.addNewTeacherDepartment(
                 newTeacherDepartment));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTeacherDepartment(
         @PathVariable String id) {
@@ -45,12 +52,20 @@ public class TeacherDepartmentController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<TeacherDepartmentDTO> updateFootballer(
+    public ResponseEntity<TeacherDepartmentDTO> updateTeacherDepartment(
         @RequestBody @Validated TeacherDepartmentDTO newTeacherDepartment,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             teacherDepartmentService.updateTeacherDepartment(
                 newTeacherDepartment, id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<TeacherDepartmentDTO>> getAllTeacherDepartments() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            teacherDepartmentService.getAllTeacherDepartments());
     }
 }

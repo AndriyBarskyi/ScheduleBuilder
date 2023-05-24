@@ -1,6 +1,6 @@
 package ua.edu.lnu.schedulebuilder.exception;
 
-import jakarta.persistence.PersistenceException;
+import javax.persistence.PersistenceException;
 
 public class InvalidEntityException extends PersistenceException {
     private static final String INVALID_ENTITY = "Entity is not valid";

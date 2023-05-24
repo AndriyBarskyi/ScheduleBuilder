@@ -12,4 +12,7 @@ public interface TeachersLoadService {
         String id);
 
     TeachersLoadDTO addNewTeachersLoad(TeachersLoadDTO newTeachersLoad);
+
+    TeachersLoadDTO getTeachersLoadByFacultyIdAndTeacherIdAndAcademicYearId(
+        String departmentId, String teacherId, String academicYearId);
 }

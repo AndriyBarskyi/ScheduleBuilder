@@ -10,30 +10,45 @@ import ua.edu.lnu.schedulebuilder.dto.AuthenticationRequestDTO;
 import ua.edu.lnu.schedulebuilder.dto.AuthenticationResponseDTO;
 import ua.edu.lnu.schedulebuilder.dto.RegistrationRequestDTO;
 import ua.edu.lnu.schedulebuilder.dto.UserDTO;
+import ua.edu.lnu.schedulebuilder.exception.EmailAlreadyTakenException;
 import ua.edu.lnu.schedulebuilder.mapper.UserMapper;
 import ua.edu.lnu.schedulebuilder.model.Role;
+import ua.edu.lnu.schedulebuilder.model.User;
 import ua.edu.lnu.schedulebuilder.repository.UserRepository;
+import ua.edu.lnu.schedulebuilder.security.PasswordConfig;
 import ua.edu.lnu.schedulebuilder.service.AuthenticationService;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
+    private static final String EMAIL_ALREADY_TAKEN = "Email already taken: ";
+
     public final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final JwtService jwtService;
+    private final PasswordConfig passwordConfig;
 
     @Override
     public AuthenticationResponseDTO register(RegistrationRequestDTO request) {
         UserDTO userDTO =
             new UserDTO(
-                request.getFirstName(),
-                request.getLastName(),
                 request.getEmail(),
                 request.getPassword(),
                 Role.USER);
-        userRepository.save(userMapper.dtoToEntity(userDTO));
+        User user = userMapper.dtoToEntity(userDTO);
+        String encodedPassword = passwordConfig.passwordEncoder()
+            .encode(userDTO.getPassword());
+        user.setPassword(encodedPassword);
+        boolean userExists = userRepository
+            .findByEmail(userDTO.getEmail())
+            .isPresent();
+
+        if (userExists) {
+            throw new EmailAlreadyTakenException(EMAIL_ALREADY_TAKEN + userDTO.getEmail(), userDTO);
+        }
+        userRepository.save(user);
         var jwtToken =
             jwtService.generateToken(userMapper.dtoToEntity(userDTO));
         return AuthenticationResponseDTO.builder()

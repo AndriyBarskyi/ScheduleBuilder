@@ -1,7 +1,10 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<TeacherDTO> getTeacherById(
         @PathVariable String id) {
@@ -30,6 +34,7 @@ public class TeacherController {
             teacherService.getTeacherById(id));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<TeacherDTO> addNewTeacher(
         @RequestBody @Validated TeacherDTO newTeacher) {
@@ -37,17 +42,27 @@ public class TeacherController {
             teacherService.addNewTeacher(newTeacher));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTeacher(@PathVariable String id) {
         teacherService.deleteTeacher(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<TeacherDTO> updateFootballer(
+    public ResponseEntity<TeacherDTO> updateTeacher(
         @RequestBody @Validated TeacherDTO newTeacher,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             teacherService.updateTeacher(newTeacher, id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/faculties/{departmentId})")
+    public ResponseEntity<List<TeacherDTO>> getAllTeachersByFacultyId(
+        @PathVariable String departmentId) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            teacherService.getAllTeachersByDepartmentId(departmentId));
     }
 }

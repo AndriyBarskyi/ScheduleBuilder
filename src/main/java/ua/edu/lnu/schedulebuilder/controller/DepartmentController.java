@@ -2,6 +2,7 @@ package ua.edu.lnu.schedulebuilder.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class DepartmentController {
 
     private final DepartmentService departmentService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<DepartmentDTO> getDepartmentById(
         @PathVariable String id) {
@@ -30,6 +32,7 @@ public class DepartmentController {
             departmentService.getDepartmentById(id));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<DepartmentDTO> addNewDepartment(
         @RequestBody @Validated DepartmentDTO newDepartment) {
@@ -37,17 +40,27 @@ public class DepartmentController {
             departmentService.addNewDepartment(newDepartment));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDepartment(@PathVariable String id) {
         departmentService.deleteDepartment(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<DepartmentDTO> updateFootballer(
+    public ResponseEntity<DepartmentDTO> updateDepartment(
         @RequestBody @Validated DepartmentDTO newDepartment,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             departmentService.updateDepartment(newDepartment, id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/faculties/{id}")
+    public ResponseEntity<Iterable<DepartmentDTO>> getDepartmentsByFacultyId(
+        @PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            departmentService.getAllDepartmentsByFacultyId(id));
     }
 }

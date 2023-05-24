@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -16,4 +18,6 @@ public interface FacultyMapper {
 
     void updateFaculty(@MappingTarget Faculty teacherFromDB,
         FacultyDTO newFaculty);
+
+    List<FacultyDTO> entitiesToDtos(List<Faculty> faculties);
 }

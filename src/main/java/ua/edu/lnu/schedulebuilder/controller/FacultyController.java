@@ -1,7 +1,10 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ public class FacultyController {
 
     private final FacultyService facultyService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<FacultyDTO> getFacultyById(
         @PathVariable String id) {
@@ -30,6 +34,7 @@ public class FacultyController {
             facultyService.getFacultyById(id));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<FacultyDTO> addNewFaculty(
         @RequestBody @Validated FacultyDTO newFaculty) {
@@ -37,17 +42,26 @@ public class FacultyController {
             facultyService.addNewFaculty(newFaculty));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFaculty(@PathVariable String id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<FacultyDTO> updateFootballer(
+    public ResponseEntity<FacultyDTO> updateFaculty(
         @RequestBody @Validated FacultyDTO newFaculty,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             facultyService.updateFaculty(newFaculty, id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<FacultyDTO>> getAllFaculties() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            facultyService.getAllFaculties());
     }
 }

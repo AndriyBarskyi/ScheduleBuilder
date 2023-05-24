@@ -11,15 +11,15 @@ import ua.edu.lnu.schedulebuilder.model.Plan;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true), nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface PlanMapper {
-    @Mapping(target = "department.id", source = "departmentId")
+    @Mapping(target = "faculty.id", source = "facultyId")
     @Mapping(target = "academicYear.id", source = "academicYearId")
     Plan dtoToEntity(PlanDTO teacherDTO);
 
-    @Mapping(target = "departmentId", source = "department.id")
+    @Mapping(target = "facultyId", source = "faculty.id")
     @Mapping(target = "academicYearId", source = "academicYear.id")
     PlanDTO entityToDto(Plan teacher);
 
-    @Mapping(target = "department.id", source = "departmentId")
+    @Mapping(target = "faculty.id", source = "facultyId")
     @Mapping(target = "academicYear.id", source = "academicYearId")
     void updatePlan(@MappingTarget Plan teacherFromDB,
         PlanDTO newPlan);

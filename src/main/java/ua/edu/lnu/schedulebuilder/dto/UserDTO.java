@@ -15,22 +15,14 @@ import ua.edu.lnu.schedulebuilder.model.Role;
 public class UserDTO {
 
     private String id;
-    private String firstName;
-    private String lastName;
     private String email;
     private Role role;
     private String password;
-    private Boolean isActive;
-    private LocalDateTime createDateTime;
-    private LocalDateTime updateDateTime;
 
-    public UserDTO(String firstName,
-        String lastName,
+    public UserDTO(
         String email,
         String password,
         Role role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;

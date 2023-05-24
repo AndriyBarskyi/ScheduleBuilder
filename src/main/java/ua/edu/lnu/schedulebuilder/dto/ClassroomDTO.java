@@ -2,6 +2,7 @@ package ua.edu.lnu.schedulebuilder.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,11 +16,13 @@ public class ClassroomDTO {
     private String id;
     @NotNull
     @NotEmpty
+    @Positive
     private String number;
     @NotNull
     @NotEmpty
     private String address;
     @NotNull
+    @Positive
     private Integer capacity;
     @NotNull
     @NotEmpty

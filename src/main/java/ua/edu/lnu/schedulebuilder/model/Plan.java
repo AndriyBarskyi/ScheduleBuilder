@@ -2,14 +2,14 @@ package ua.edu.lnu.schedulebuilder.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,6 +62,6 @@ public class Plan {
     private AcademicYear academicYear;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "fk_plan_department"))
-    private Department department; // todo faculty
+    @JoinColumn(name = "faculty_id", foreignKey = @ForeignKey(name = "fk_plan_faculty"))
+    private Faculty faculty;
 }

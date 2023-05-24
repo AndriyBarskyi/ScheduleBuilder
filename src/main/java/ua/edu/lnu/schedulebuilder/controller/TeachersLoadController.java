@@ -2,6 +2,7 @@ package ua.edu.lnu.schedulebuilder.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class TeachersLoadController {
 
     private final TeachersLoadService teachersLoadService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<TeachersLoadDTO> getTeachersLoadById(
         @PathVariable String id) {
@@ -30,6 +32,7 @@ public class TeachersLoadController {
             teachersLoadService.getTeachersLoadById(id));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<TeachersLoadDTO> addNewTeachersLoad(
         @RequestBody @Validated TeachersLoadDTO newTeachersLoad) {
@@ -37,17 +40,30 @@ public class TeachersLoadController {
             teachersLoadService.addNewTeachersLoad(newTeachersLoad));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTeachersLoad(@PathVariable String id) {
         teachersLoadService.deleteTeachersLoad(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<TeachersLoadDTO> updateFootballer(
+    public ResponseEntity<TeachersLoadDTO> updateTeachersLoad(
         @RequestBody @Validated TeachersLoadDTO newTeachersLoad,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             teachersLoadService.updateTeachersLoad(newTeachersLoad, id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/departments/{departmentId}/teachers/{teacherId}/academicYears/{academicYearId}")
+    public ResponseEntity<TeachersLoadDTO> getTeachersLoadByDepartmentIdAndTeacherIdAndAcademicYearId(
+        @PathVariable String departmentId,
+        @PathVariable String teacherId,
+        @PathVariable String academicYearId) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            teachersLoadService.getTeachersLoadByFacultyIdAndTeacherIdAndAcademicYearId(
+                departmentId, teacherId, academicYearId));
     }
 }

@@ -2,6 +2,7 @@ package ua.edu.lnu.schedulebuilder.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class PlanController {
 
     private final PlanService planService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<PlanDTO> getPlanById(
         @PathVariable String id) {
@@ -30,6 +32,7 @@ public class PlanController {
             planService.getPlanById(id));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<PlanDTO> addNewPlan(
         @RequestBody @Validated PlanDTO newPlan) {
@@ -37,17 +40,28 @@ public class PlanController {
             planService.addNewPlan(newPlan));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlan(@PathVariable String id) {
         planService.deletePlan(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<PlanDTO> updateFootballer(
+    public ResponseEntity<PlanDTO> updatePlan(
         @RequestBody @Validated PlanDTO newPlan,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             planService.updatePlan(newPlan, id));
+    }
+
+    // getPlanByFacultyId
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/faculties/{facultyId}/academic-years/{academicYear}")
+    public ResponseEntity<PlanDTO> getPlanByFacultyId(
+        @PathVariable String facultyId, @PathVariable String academicYear) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            planService.getPlanByFacultyIdAndAcademicYearId(facultyId, academicYear));
     }
 }
