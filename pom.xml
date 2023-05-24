@@ -51,8 +51,8 @@
     </dependency>  
     <dependency> 
       <groupId>org.projectlombok</groupId>  
-      <artifactId>lombok</artifactId>  
-      <optional>true</optional> 
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
     </dependency>  
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
@@ -134,16 +134,7 @@
             </exclude> 
           </excludes> 
         </configuration> 
-      </plugin>  
-      <plugin> 
-        <groupId>org.apache.maven.plugins</groupId>  
-        <artifactId>maven-compiler-plugin</artifactId>  
-        <configuration> 
-          <proc>none</proc>  
-          <source>11</source>
-          <target>11</target>
-        </configuration> 
-      </plugin>  
+      </plugin>
       <plugin> 
         <groupId>org.apache.maven.plugins</groupId>  
         <artifactId>maven-compiler-plugin</artifactId>  
@@ -179,7 +170,7 @@
           <schemaVersion>V2</schemaVersion>
           <subscriptionId>a9ea18e4-1e3b-46bb-9449-800be5db5b2f</subscriptionId>
           <resourceGroup>ScheduleBuilder-1684699442112-rg</resourceGroup>
-          <appName>ScheduleBuilder-1684699442112</appName>
+          <appName>schedule-builder</appName>
           <pricingTier>P1v2</pricingTier>
           <region>westeurope</region>
           <runtime>
