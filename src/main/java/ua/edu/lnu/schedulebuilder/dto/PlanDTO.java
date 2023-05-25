@@ -16,6 +16,9 @@ public class PlanDTO {
 
     @NotNull
     @NotEmpty
+    private String subject;
+    @NotNull
+    @NotEmpty
     private String course;
     @NotNull
     @NotEmpty
@@ -56,6 +59,8 @@ public class PlanDTO {
     @NotNull
     @PositiveOrZero
     private Integer others;
+    @NotNull
+    private Boolean isExtramural;
     @NotNull
     @NotEmpty
     private String academicYearId;

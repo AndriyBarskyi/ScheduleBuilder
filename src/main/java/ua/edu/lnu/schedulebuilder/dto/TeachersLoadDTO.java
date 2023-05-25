@@ -2,6 +2,7 @@ package ua.edu.lnu.schedulebuilder.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +15,15 @@ import lombok.NoArgsConstructor;
 public class TeachersLoadDTO {
     private String id;
 
+    @NotNull
+    @NotEmpty
+    private String subject;
+    @NotNull
+    @NotEmpty
+    private String course;
+    @NotNull
+    @Positive
+    private Integer semester;
     @NotNull
     @NotEmpty
     private String facultyAbbr;
@@ -50,6 +60,9 @@ public class TeachersLoadDTO {
     @NotNull
     @PositiveOrZero
     private Integer passFailCoursesExtramural;
+    @NotNull
+    @PositiveOrZero
+    private Integer consultationsExtramural;
     @NotNull
     @PositiveOrZero
     private Integer controlWorks;

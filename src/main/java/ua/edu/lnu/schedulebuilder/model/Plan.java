@@ -29,6 +29,8 @@ public class Plan {
     private String id;
 
     @Column(nullable = false)
+    private String subject;
+    @Column(nullable = false)
     private String course;
     @Column(nullable = false)
     private String facultyAbbr;
@@ -56,6 +58,8 @@ public class Plan {
     private Integer consultations;
     @Column(nullable = false)
     private Integer others;
+    @Column(nullable = false)
+    private Boolean isExtramural;
 
     @ManyToOne
     @JoinColumn(name = "academic_year_id", foreignKey = @ForeignKey(name = "fk_plan_academic_year"))

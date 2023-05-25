@@ -29,6 +29,12 @@ public class TeachersLoad {
     private String id;
 
     @Column(nullable = false)
+    private String subject;
+    @Column(nullable = false)
+    private Integer course;
+    @Column(nullable = false)
+    private Integer semester;
+    @Column(nullable = false)
     private String facultyAbbr;
     @Column(nullable = false)
     private Integer students;
@@ -52,6 +58,8 @@ public class TeachersLoad {
     private Integer examsExtramural;
     @Column(nullable = false)
     private Integer passFailCoursesExtramural;
+    @Column(nullable = false)
+    private Integer consultationsExtramural;
     @Column(nullable = false)
     private Integer controlWorks;
     @Column(nullable = false)
