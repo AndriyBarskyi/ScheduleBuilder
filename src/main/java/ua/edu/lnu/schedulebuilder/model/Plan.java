@@ -38,6 +38,8 @@ public class Plan {
     @Column(nullable = false)
     private Integer groups;
     @Column(nullable = false)
+    private Integer semester;
+    @Column(nullable = false)
     private Integer students;
     @Column(nullable = false)
     private Integer lectures;

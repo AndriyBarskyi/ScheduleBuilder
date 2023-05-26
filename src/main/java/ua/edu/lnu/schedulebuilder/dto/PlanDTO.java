@@ -28,6 +28,9 @@ public class PlanDTO {
     private Integer groups;
     @NotNull
     @PositiveOrZero
+    private Integer semester;
+    @NotNull
+    @PositiveOrZero
     private Integer students;
     @NotNull
     @PositiveOrZero
