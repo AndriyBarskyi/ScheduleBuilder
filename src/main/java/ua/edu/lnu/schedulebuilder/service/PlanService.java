@@ -13,5 +13,6 @@ public interface PlanService {
 
     PlanDTO addNewPlan(PlanDTO newPlan);
 
-    PlanDTO getPlanByFacultyIdAndAcademicYearId(String facultyId, String academicYearId);
+    PlanDTO getPlanByFacultyIdAndAcademicYearId(String facultyId,
+        String academicYearId);
 }

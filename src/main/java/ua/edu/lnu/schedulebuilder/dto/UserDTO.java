@@ -1,7 +1,5 @@
 package ua.edu.lnu.schedulebuilder.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

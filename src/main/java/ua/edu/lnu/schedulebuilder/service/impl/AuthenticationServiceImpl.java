@@ -46,7 +46,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             .isPresent();
 
         if (userExists) {
-            throw new EmailAlreadyTakenException(EMAIL_ALREADY_TAKEN + userDTO.getEmail(), userDTO);
+            throw new EmailAlreadyTakenException(
+                EMAIL_ALREADY_TAKEN + userDTO.getEmail(), userDTO);
         }
         userRepository.save(user);
         var jwtToken =

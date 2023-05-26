@@ -19,7 +19,8 @@ public interface TeacherDepartmentMapper {
 
     TeacherDepartmentDTO entityToDto(TeacherDepartment teacherDepartment);
 
-    void updateTeacherDepartment(@MappingTarget TeacherDepartment teacherDepartmentFromDB,
+    void updateTeacherDepartment(
+        @MappingTarget TeacherDepartment teacherDepartmentFromDB,
         TeacherDepartmentDTO newTeacherDepartment);
 
     @Mapping(target = "departmentDTO", source = "department")
@@ -28,7 +29,8 @@ public interface TeacherDepartmentMapper {
 
     @Mapping(target = "department.id", source = "departmentId")
     @Mapping(target = "teacher.id", source = "teacherId")
-    TeacherDepartment saveDtoToEntity(TeacherDepartmentSaveDTO newTeacherDepartment);
+    TeacherDepartment saveDtoToEntity(
+        TeacherDepartmentSaveDTO newTeacherDepartment);
 
     @Mapping(target = "departmentId", source = "department.id")
     @Mapping(target = "teacherId", source = "teacher.id")

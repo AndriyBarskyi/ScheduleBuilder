@@ -15,7 +15,6 @@ import ua.edu.lnu.schedulebuilder.service.TeachersLoadService;
 
 import static ua.edu.lnu.schedulebuilder.service.impl.AcademicYearServiceImpl.ACADEMIC_YEAR_NOT_FOUND_BY_ID;
 import static ua.edu.lnu.schedulebuilder.service.impl.DepartmentServiceImpl.DEPARTMENT_NOT_FOUND_BY_ID;
-import static ua.edu.lnu.schedulebuilder.service.impl.PlanServiceImpl.PLAN_NOT_FOUND_BY_ID;
 import static ua.edu.lnu.schedulebuilder.service.impl.TeacherServiceImpl.TEACHER_NOT_FOUND_BY_ID;
 
 @Service

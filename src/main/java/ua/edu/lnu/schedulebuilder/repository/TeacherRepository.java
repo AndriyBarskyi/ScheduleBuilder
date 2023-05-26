@@ -10,8 +10,8 @@ import ua.edu.lnu.schedulebuilder.model.Teacher;
 public interface TeacherRepository extends JpaRepository<Teacher, String> {
 
     @Query("SELECT t from Teacher t "
-            + "join TeacherDepartment td "
-            + "where td.teacher.id = t.id and td.department.id = ?1"
+        + "join TeacherDepartment td "
+        + "where td.teacher.id = t.id and td.department.id = ?1"
     )
     List<Teacher> findAllByDepartmentId(String departmentId);
 }

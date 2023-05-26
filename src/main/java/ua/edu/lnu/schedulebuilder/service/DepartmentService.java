@@ -7,6 +7,7 @@ import ua.edu.lnu.schedulebuilder.dto.DepartmentDTO;
 public interface DepartmentService {
 
     List<DepartmentDTO> getAllDepartmentsByFacultyId(String facultyId);
+
     DepartmentDTO getDepartmentById(String id);
 
     void deleteDepartment(String id);

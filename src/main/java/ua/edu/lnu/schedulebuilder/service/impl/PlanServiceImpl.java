@@ -13,7 +13,6 @@ import ua.edu.lnu.schedulebuilder.repository.PlanRepository;
 import ua.edu.lnu.schedulebuilder.service.PlanService;
 
 import static ua.edu.lnu.schedulebuilder.service.impl.AcademicYearServiceImpl.ACADEMIC_YEAR_NOT_FOUND_BY_ID;
-import static ua.edu.lnu.schedulebuilder.service.impl.DepartmentServiceImpl.DEPARTMENT_NOT_FOUND_BY_ID;
 import static ua.edu.lnu.schedulebuilder.service.impl.FacultyServiceImpl.FACULTY_NOT_FOUND_BY_ID;
 
 @Service
@@ -37,10 +36,13 @@ public class PlanServiceImpl implements PlanService {
         this.facultyRepository = facultyRepository;
     }
 
-    @Override public PlanDTO getPlanByFacultyIdAndAcademicYearId(String facultyId, String academicYearId){
+    @Override
+    public PlanDTO getPlanByFacultyIdAndAcademicYearId(String facultyId,
+        String academicYearId) {
         checkThatFacultyExists(facultyId);
         return planMapper.entityToDto(
-            planRepository.findPlanByFacultyIdAndAcademicYearId(facultyId, academicYearId));
+            planRepository.findPlanByFacultyIdAndAcademicYearId(facultyId,
+                academicYearId));
     }
 
     @Override

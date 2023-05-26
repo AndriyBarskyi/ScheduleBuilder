@@ -62,6 +62,7 @@ public class PlanController {
     public ResponseEntity<PlanDTO> getPlanByFacultyId(
         @PathVariable String facultyId, @PathVariable String academicYear) {
         return ResponseEntity.status(HttpStatus.OK).body(
-            planService.getPlanByFacultyIdAndAcademicYearId(facultyId, academicYear));
+            planService.getPlanByFacultyIdAndAcademicYearId(facultyId,
+                academicYear));
     }
 }
