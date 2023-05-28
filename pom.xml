@@ -171,7 +171,7 @@
           <subscriptionId>a9ea18e4-1e3b-46bb-9449-800be5db5b2f</subscriptionId>
           <resourceGroup>ScheduleBuilder-1684699442112-rg</resourceGroup>
           <appName>schedule-builder</appName>
-          <pricingTier>P1v2</pricingTier>
+          <pricingTier>B1</pricingTier>
           <region>westeurope</region>
           <runtime>
             <os>linux</os>
