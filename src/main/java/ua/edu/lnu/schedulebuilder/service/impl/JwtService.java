@@ -21,12 +21,12 @@ public class JwtService {
     private static final String SECRET_KEY =
         "6150645367566B59703373367638792F423F4528482B4D6251655468576D5A7134743777217A24432646294A404E635266556A586E3272357538782F413F442A472D4B6150645367566B59703373367639792442264529482B4D6251655468576D5A7134743777217A25432A462D4A614E635266556A586E3272357538782F413F4428472B4B6250655367566B5970337336763979244226452948404D635166546A576D5A7134743777217A25432A462D4A614E645267556B58703272357538782F413F4428472B4B6250655368566D5971337436763979244226452948404D635166546A576E5A7234753778214125432A462D4A614E645267556B58703273";
 
-    public String extractUsername(String jwt) {
-        return extractClaim(jwt, Claims::getSubject);
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
     }
 
-    public <T> T extractClaim(String jwt, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(jwt);
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
@@ -61,11 +61,11 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    private Claims extractAllClaims(String jwt) {
+    private Claims extractAllClaims(String token) {
         return Jwts
             .parserBuilder()
             .setSigningKey(getSignInKey())
-            .build().parseClaimsJws(jwt)
+            .build().parseClaimsJws(token)
             .getBody();
     }
 

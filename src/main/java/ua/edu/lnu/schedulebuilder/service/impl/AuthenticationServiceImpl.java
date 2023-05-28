@@ -1,5 +1,6 @@
 package ua.edu.lnu.schedulebuilder.service.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordConfig passwordConfig;
 
     @Override
-    public AuthenticationResponseDTO register(RegistrationRequestDTO request) {
+    public AuthenticationResponseDTO register(@NotNull RegistrationRequestDTO request) {
         UserDTO userDTO =
             new UserDTO(
                 request.getEmail(),
@@ -53,7 +54,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var jwtToken =
             jwtService.generateToken(userMapper.dtoToEntity(userDTO));
         return AuthenticationResponseDTO.builder()
-            .jwt(jwtToken)
+            .token(jwtToken)
             .build();
     }
 
@@ -68,7 +69,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var jwtToken =
             jwtService.generateToken(user);
         return AuthenticationResponseDTO.builder()
-            .jwt(jwtToken)
+            .token(jwtToken)
             .build();
     }
 }
