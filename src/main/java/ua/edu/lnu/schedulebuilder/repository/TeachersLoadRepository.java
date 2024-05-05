@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -9,7 +11,7 @@ public interface TeachersLoadRepository
     extends JpaRepository<TeachersLoad, String> {
 
     @Query("SELECT t FROM TeachersLoad t WHERE t.department.id = ?1 AND t.teacher.id = ?2 AND t.academicYear.id = ?3")
-    TeachersLoad findByDepartmentIdAndTeacherIdAndAcademicYearId(
+    List<TeachersLoad> findAllByDepartmentIdAndTeacherIdAndAcademicYearId(
         String facultyId, String teacherId,
         String academicYearId);
 }

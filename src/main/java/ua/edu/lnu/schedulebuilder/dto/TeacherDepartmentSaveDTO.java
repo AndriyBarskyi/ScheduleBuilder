@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeacherDepartmentSaveDTO {
+    @NotNull
+    @NotEmpty
     private String id;
-
     @NotNull
     @Positive
     private Double budgetRate;

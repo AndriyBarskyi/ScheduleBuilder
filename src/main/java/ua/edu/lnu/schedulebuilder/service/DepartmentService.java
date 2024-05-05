@@ -16,4 +16,6 @@ public interface DepartmentService {
         String id);
 
     DepartmentDTO addNewDepartment(DepartmentDTO newDepartment);
+
+    List<DepartmentDTO> getAllDepartments();
 }

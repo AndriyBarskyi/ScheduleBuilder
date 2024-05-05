@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +10,11 @@ import ua.edu.lnu.schedulebuilder.exception.EntityNotExistsException;
 import ua.edu.lnu.schedulebuilder.mapper.PlanMapper;
 import ua.edu.lnu.schedulebuilder.repository.AcademicYearRepository;
 import ua.edu.lnu.schedulebuilder.repository.DepartmentRepository;
-import ua.edu.lnu.schedulebuilder.repository.FacultyRepository;
 import ua.edu.lnu.schedulebuilder.repository.PlanRepository;
 import ua.edu.lnu.schedulebuilder.service.PlanService;
 
 import static ua.edu.lnu.schedulebuilder.service.impl.AcademicYearServiceImpl.ACADEMIC_YEAR_NOT_FOUND_BY_ID;
-import static ua.edu.lnu.schedulebuilder.service.impl.FacultyServiceImpl.FACULTY_NOT_FOUND_BY_ID;
+import static ua.edu.lnu.schedulebuilder.service.impl.DepartmentServiceImpl.DEPARTMENT_NOT_FOUND_BY_ID;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -22,27 +23,32 @@ public class PlanServiceImpl implements PlanService {
     private final PlanRepository planRepository;
     private final AcademicYearRepository academicYearRepository;
     private final PlanMapper planMapper;
-    private final FacultyRepository facultyRepository;
+    private final DepartmentRepository departmentRepository;
 
     @Autowired
     public PlanServiceImpl(PlanRepository planRepository,
-        DepartmentRepository departmentRepository,
         AcademicYearRepository academicYearRepository,
         PlanMapper planMapper,
-        FacultyRepository facultyRepository) {
+        DepartmentRepository departmentRepository) {
         this.planRepository = planRepository;
         this.academicYearRepository = academicYearRepository;
         this.planMapper = planMapper;
-        this.facultyRepository = facultyRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
-    public PlanDTO getPlanByFacultyIdAndAcademicYearId(String facultyId,
+    public List<PlanDTO> getPlansByDepartmentIdAndAcademicYearId(
+        String departmentId,
         String academicYearId) {
-        checkThatFacultyExists(facultyId);
-        return planMapper.entityToDto(
-            planRepository.findPlanByFacultyIdAndAcademicYearId(facultyId,
+        checkThatDepartmentExists(departmentId);
+        return planMapper.entitiesToDtos(
+            planRepository.findPlansByDepartmentIdAndAcademicYearId(
+                departmentId,
                 academicYearId));
+    }
+
+    @Override public List<PlanDTO> getAllPlans() {
+        return planMapper.entitiesToDtos(planRepository.findAll());
     }
 
     @Override
@@ -61,7 +67,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public PlanDTO updatePlan(PlanDTO newPlan, String id) {
         checkThatPlanExists(id);
-        checkThatFacultyExists(newPlan.getFacultyId());
+        checkThatDepartmentExists(newPlan.getDepartmentId());
         checkThatAcademicYearExists(newPlan.getAcademicYearId());
         return planRepository.findById(id)
             .map(plan -> {
@@ -73,7 +79,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public PlanDTO addNewPlan(PlanDTO newPlan) {
-        checkThatFacultyExists(newPlan.getFacultyId());
+        checkThatDepartmentExists(newPlan.getDepartmentId());
         checkThatAcademicYearExists(newPlan.getAcademicYearId());
         return planMapper.entityToDto(
             planRepository.save(
@@ -82,10 +88,10 @@ public class PlanServiceImpl implements PlanService {
         );
     }
 
-    private void checkThatFacultyExists(String facultyId) {
-        if (!facultyRepository.existsById(facultyId)) {
+    private void checkThatDepartmentExists(String departmentId) {
+        if (!departmentRepository.existsById(departmentId)) {
             throw new EntityNotExistsException(
-                FACULTY_NOT_FOUND_BY_ID + facultyId);
+                DEPARTMENT_NOT_FOUND_BY_ID + departmentId);
         }
     }
 

@@ -1,11 +1,14 @@
 package ua.edu.lnu.schedulebuilder.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -33,4 +36,13 @@ public class AcademicYear {
 
     @Column(nullable = false)
     private LocalDate endYear;
+
+    @OneToMany(mappedBy = "academicYear", cascade = CascadeType.REMOVE)
+    private List<Plan> plans;
+
+    @OneToMany(mappedBy = "academicYear", cascade = CascadeType.REMOVE)
+    private List<TeachersLoad> teachersLoads;
+
+    @OneToMany(mappedBy = "academicYear", cascade = CascadeType.REMOVE)
+    private List<Group> groups;
 }

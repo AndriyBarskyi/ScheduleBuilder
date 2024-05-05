@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,16 +13,18 @@ import ua.edu.lnu.schedulebuilder.model.Plan;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true), nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface PlanMapper {
-    @Mapping(target = "faculty.id", source = "facultyId")
+    @Mapping(target = "department.id", source = "departmentId")
     @Mapping(target = "academicYear.id", source = "academicYearId")
     Plan dtoToEntity(PlanDTO teacherDTO);
 
-    @Mapping(target = "facultyId", source = "faculty.id")
+    @Mapping(target = "departmentId", source = "department.id")
     @Mapping(target = "academicYearId", source = "academicYear.id")
     PlanDTO entityToDto(Plan teacher);
 
-    @Mapping(target = "faculty.id", source = "facultyId")
+    @Mapping(target = "department.id", source = "departmentId")
     @Mapping(target = "academicYear.id", source = "academicYearId")
     void updatePlan(@MappingTarget Plan teacherFromDB,
         PlanDTO newPlan);
+
+    List<PlanDTO> entitiesToDtos(List<Plan> plans);
 }

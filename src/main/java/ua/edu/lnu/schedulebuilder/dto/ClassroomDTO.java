@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class ClassroomDTO {
+    @NotNull
+    @NotEmpty
     private String id;
     @NotNull
     @NotEmpty

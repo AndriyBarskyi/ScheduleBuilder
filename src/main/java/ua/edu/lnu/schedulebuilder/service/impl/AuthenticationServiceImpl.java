@@ -32,7 +32,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordConfig passwordConfig;
 
     @Override
-    public AuthenticationResponseDTO register(@NotNull RegistrationRequestDTO request) {
+    public AuthenticationResponseDTO register(
+        @NotNull RegistrationRequestDTO request) {
         UserDTO userDTO =
             new UserDTO(
                 request.getEmail(),
@@ -55,6 +56,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             jwtService.generateToken(userMapper.dtoToEntity(userDTO));
         return AuthenticationResponseDTO.builder()
             .token(jwtToken)
+            .isAuth(true)
             .build();
     }
 
@@ -70,6 +72,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             jwtService.generateToken(user);
         return AuthenticationResponseDTO.builder()
             .token(jwtToken)
+            .isAuth(true)
             .build();
     }
 }

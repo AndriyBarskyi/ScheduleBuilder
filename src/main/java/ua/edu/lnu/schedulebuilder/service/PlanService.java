@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service;
 
+import java.util.List;
+
 import ua.edu.lnu.schedulebuilder.dto.PlanDTO;
 
 public interface PlanService {
@@ -13,6 +15,8 @@ public interface PlanService {
 
     PlanDTO addNewPlan(PlanDTO newPlan);
 
-    PlanDTO getPlanByFacultyIdAndAcademicYearId(String facultyId,
+    List<PlanDTO> getPlansByDepartmentIdAndAcademicYearId(String departmentId,
         String academicYearId);
+
+    List<PlanDTO> getAllPlans();
 }

@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FacultyDTO {
+    @NotNull
+    @NotEmpty
     private String id;
-
     @NotNull
     @NotEmpty
     private String name;

@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -26,4 +28,6 @@ public interface TeachersLoadMapper {
     @Mapping(target = "academicYear.id", source = "academicYearId")
     void updateTeachersLoad(@MappingTarget TeachersLoad teacherFromDB,
         TeachersLoadDTO newTeachersLoad);
+
+    List<TeachersLoadDTO> entitiesToDtos(List<TeachersLoad> teachersLoadList);
 }

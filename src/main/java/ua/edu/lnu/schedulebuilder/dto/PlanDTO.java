@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlanDTO {
+    @NotNull
+    @NotEmpty
     private String id;
-
     @NotNull
     @NotEmpty
     private String subject;
@@ -69,5 +70,5 @@ public class PlanDTO {
     private String academicYearId;
     @NotNull
     @NotEmpty
-    private String facultyId;
+    private String departmentId;
 }

@@ -54,8 +54,8 @@ public class TeacherDepartmentController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<TeacherDepartmentDTO> updateTeacherDepartment(
-        @RequestBody @Validated TeacherDepartmentDTO newTeacherDepartment,
+    public ResponseEntity<TeacherDepartmentSaveDTO> updateTeacherDepartment(
+        @RequestBody @Validated TeacherDepartmentSaveDTO newTeacherDepartment,
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             teacherDepartmentService.updateTeacherDepartment(

@@ -11,4 +11,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class AuthenticationResponseDTO {
     private String token;
+    private Boolean isAuth;
 }

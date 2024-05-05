@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -62,5 +64,12 @@ public class DepartmentController {
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             departmentService.getAllDepartmentsByFacultyId(id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            departmentService.getAllDepartments());
     }
 }

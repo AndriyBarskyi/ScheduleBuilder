@@ -75,6 +75,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         );
     }
 
+    @Override public List<DepartmentDTO> getAllDepartments() {
+        return departmentMapper.entitiesToDtos(
+            departmentRepository.findAll());
+    }
+
     private void checkThatDepartmentExists(String id) {
         if (!departmentRepository.existsById(id)) {
             throw new EntityNotExistsException(DEPARTMENT_NOT_FOUND_BY_ID + id);

@@ -16,4 +16,6 @@ public interface TeacherService {
     TeacherDTO addNewTeacher(TeacherDTO newTeacher);
 
     List<TeacherDTO> getAllTeachersByDepartmentId(String departmentId);
+
+    List<TeacherDTO> getAllTeachers();
 }

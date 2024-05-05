@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -54,5 +56,13 @@ public class ClassroomController {
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             classroomService.updateClassroom(newClassroom, id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/faculty/{facultyId}")
+    public ResponseEntity<List<ClassroomDTO>> getAllClassroomsByFacultyId(
+        @PathVariable String facultyId) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            classroomService.getAllClassroomsByFacultyId(facultyId));
     }
 }

@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +60,11 @@ public class AcademicYearServiceImpl implements AcademicYearService {
                 academicYearMapper.dtoToEntity(newAcademicYear)
             )
         );
+    }
+
+    @Override public List<AcademicYearDTO> getAllAcademicYears() {
+        return academicYearMapper.entitiesToDtos(
+            academicYearRepository.findAll());
     }
 
     private void checkThatAcademicYearExists(String id) {

@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,12 +60,19 @@ public class TeachersLoadController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/departments/{departmentId}/teachers/{teacherId}/academicYears/{academicYearId}")
-    public ResponseEntity<TeachersLoadDTO> getTeachersLoadByDepartmentIdAndTeacherIdAndAcademicYearId(
+    public ResponseEntity<List<TeachersLoadDTO>> getTeachersLoadsByDepartmentIdAndTeacherIdAndAcademicYearId(
         @PathVariable String departmentId,
         @PathVariable String teacherId,
         @PathVariable String academicYearId) {
         return ResponseEntity.status(HttpStatus.OK).body(
-            teachersLoadService.getTeachersLoadByFacultyIdAndTeacherIdAndAcademicYearId(
+            teachersLoadService.getTeachersLoadsByFacultyIdAndTeacherIdAndAcademicYearId(
                 departmentId, teacherId, academicYearId));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<TeachersLoadDTO>> getAllTeachersLoads() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            teachersLoadService.getAllTeachersLoads());
     }
 }

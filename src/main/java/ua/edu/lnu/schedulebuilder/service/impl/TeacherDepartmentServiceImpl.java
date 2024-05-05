@@ -48,17 +48,17 @@ public class TeacherDepartmentServiceImpl implements TeacherDepartmentService {
     }
 
     @Override
-    public TeacherDepartmentDTO updateTeacherDepartment(
-        TeacherDepartmentDTO newTeacherDepartment, String id) {
+    public TeacherDepartmentSaveDTO updateTeacherDepartment(
+        TeacherDepartmentSaveDTO newTeacherDepartment, String id) {
         checkThatTeacherDepartmentExists(id);
-        checkThatTeacherExists(newTeacherDepartment.getTeacherDTO().getId());
+        checkThatTeacherExists(newTeacherDepartment.getTeacherId());
         checkThatDepartmentExists(
-            newTeacherDepartment.getDepartmentDTO().getId());
+            newTeacherDepartment.getDepartmentId());
         return teacherDepartmentRepository.findById(id)
             .map(teacherDepartment -> {
                 teacherDepartmentMapper.updateTeacherDepartment(
                     teacherDepartment, newTeacherDepartment);
-                return teacherDepartmentMapper.entityToDto(
+                return teacherDepartmentMapper.entityToSaveDto(
                     teacherDepartmentRepository
                         .save(teacherDepartment));
             }).orElseThrow(EntityNotExistsException::new);

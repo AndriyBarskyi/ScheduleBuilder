@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -56,13 +58,20 @@ public class PlanController {
             planService.updatePlan(newPlan, id));
     }
 
-    // getPlanByFacultyId
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/faculties/{facultyId}/academic-years/{academicYear}")
-    public ResponseEntity<PlanDTO> getPlanByFacultyId(
-        @PathVariable String facultyId, @PathVariable String academicYear) {
+    @GetMapping("/departments/{departmentId}/academic-years/{academicYearId}")
+    public ResponseEntity<List<PlanDTO>> getPlansByDepartmentIdAndAcademicYearId(
+        @PathVariable String departmentId,
+        @PathVariable String academicYearId) {
         return ResponseEntity.status(HttpStatus.OK).body(
-            planService.getPlanByFacultyIdAndAcademicYearId(facultyId,
-                academicYear));
+            planService.getPlansByDepartmentIdAndAcademicYearId(departmentId,
+                academicYearId));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<PlanDTO>> getAllPlans() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            planService.getAllPlans());
     }
 }

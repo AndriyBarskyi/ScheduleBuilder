@@ -59,10 +59,17 @@ public class TeacherController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/faculties/{departmentId})")
-    public ResponseEntity<List<TeacherDTO>> getAllTeachersByFacultyId(
+    @GetMapping("/departments/{departmentId}")
+    public ResponseEntity<List<TeacherDTO>> getAllTeachersByDepartmentId(
         @PathVariable String departmentId) {
         return ResponseEntity.status(HttpStatus.OK).body(
             teacherService.getAllTeachersByDepartmentId(departmentId));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            teacherService.getAllTeachers());
     }
 }

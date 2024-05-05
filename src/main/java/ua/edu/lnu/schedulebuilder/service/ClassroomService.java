@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service;
 
+import java.util.List;
+
 import ua.edu.lnu.schedulebuilder.dto.ClassroomDTO;
 
 public interface ClassroomService {
@@ -12,4 +14,6 @@ public interface ClassroomService {
         String id);
 
     ClassroomDTO addNewClassroom(ClassroomDTO newClassroom);
+
+    List<ClassroomDTO> getAllClassroomsByFacultyId(String facultyId);
 }

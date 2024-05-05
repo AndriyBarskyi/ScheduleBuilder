@@ -11,8 +11,8 @@ public interface TeacherDepartmentService {
 
     void deleteTeacherDepartment(String id);
 
-    TeacherDepartmentDTO updateTeacherDepartment(
-        TeacherDepartmentDTO newTeacherDepartment,
+    TeacherDepartmentSaveDTO updateTeacherDepartment(
+        TeacherDepartmentSaveDTO newTeacherDepartment,
         String id);
 
     TeacherDepartmentSaveDTO addNewTeacherDepartment(

@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,7 +20,7 @@ import ua.edu.lnu.schedulebuilder.dto.AcademicYearDTO;
 import ua.edu.lnu.schedulebuilder.service.AcademicYearService;
 
 @RestController
-@RequestMapping("/api/v1/academicYears")
+@RequestMapping("/api/v1/academic-years")
 @RequiredArgsConstructor
 public class AcademicYearController {
 
@@ -54,5 +56,12 @@ public class AcademicYearController {
         @PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(
             academicYearService.updateAcademicYear(newAcademicYear, id));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<AcademicYearDTO>> getAllAcademicYears() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            academicYearService.getAllAcademicYears());
     }
 }

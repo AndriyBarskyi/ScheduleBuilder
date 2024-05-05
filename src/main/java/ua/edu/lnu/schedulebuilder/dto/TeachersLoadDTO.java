@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeachersLoadDTO {
+    @NotNull
+    @NotEmpty
     private String id;
-
     @NotNull
     @NotEmpty
     private String subject;
@@ -83,7 +84,7 @@ public class TeachersLoadDTO {
     private Integer industrialPractices;
     @NotNull
     @PositiveOrZero
-    private Integer DEKs;
+    private Integer deks;
     @NotNull
     @PositiveOrZero
     private Integer postgrad;

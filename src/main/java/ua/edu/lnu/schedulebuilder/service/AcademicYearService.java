@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service;
 
+import java.util.List;
+
 import ua.edu.lnu.schedulebuilder.dto.AcademicYearDTO;
 
 public interface AcademicYearService {
@@ -12,4 +14,6 @@ public interface AcademicYearService {
         String id);
 
     AcademicYearDTO addNewAcademicYear(AcademicYearDTO newAcademicYear);
+
+    List<AcademicYearDTO> getAllAcademicYears();
 }

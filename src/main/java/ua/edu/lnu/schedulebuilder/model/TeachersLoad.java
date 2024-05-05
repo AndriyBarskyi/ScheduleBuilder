@@ -74,7 +74,7 @@ public class TeachersLoad {
     @Column(nullable = false)
     private Integer industrialPractices;
     @Column(nullable = false)
-    private Integer DEKs;
+    private Integer deks;
     @Column(nullable = false)
     private Integer postgrad;
     @Column(nullable = false)

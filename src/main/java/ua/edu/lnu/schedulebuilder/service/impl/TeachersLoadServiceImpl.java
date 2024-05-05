@@ -1,5 +1,7 @@
 package ua.edu.lnu.schedulebuilder.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +10,6 @@ import ua.edu.lnu.schedulebuilder.exception.EntityNotExistsException;
 import ua.edu.lnu.schedulebuilder.mapper.TeachersLoadMapper;
 import ua.edu.lnu.schedulebuilder.repository.AcademicYearRepository;
 import ua.edu.lnu.schedulebuilder.repository.DepartmentRepository;
-import ua.edu.lnu.schedulebuilder.repository.PlanRepository;
 import ua.edu.lnu.schedulebuilder.repository.TeacherRepository;
 import ua.edu.lnu.schedulebuilder.repository.TeachersLoadRepository;
 import ua.edu.lnu.schedulebuilder.service.TeachersLoadService;
@@ -25,7 +26,6 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
     private final TeachersLoadRepository teachersLoadRepository;
     private final AcademicYearRepository academicYearRepository;
     private final DepartmentRepository departmentRepository;
-    private final PlanRepository planRepository;
     private final TeacherRepository teacherRepository;
     private final TeachersLoadMapper teachersLoadMapper;
 
@@ -35,13 +35,11 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
         AcademicYearRepository academicYearRepository,
         DepartmentRepository departmentRepository,
         TeacherRepository teacherRepository,
-        PlanRepository planRepository,
         TeachersLoadMapper teachersLoadMapper) {
         this.teachersLoadRepository = teachersLoadRepository;
         this.academicYearRepository = academicYearRepository;
         this.departmentRepository = departmentRepository;
         this.teacherRepository = teacherRepository;
-        this.planRepository = planRepository;
         this.teachersLoadMapper = teachersLoadMapper;
     }
 
@@ -87,12 +85,17 @@ public class TeachersLoadServiceImpl implements TeachersLoadService {
     }
 
     @Override
-    public TeachersLoadDTO getTeachersLoadByFacultyIdAndTeacherIdAndAcademicYearId(
+    public List<TeachersLoadDTO> getTeachersLoadsByFacultyIdAndTeacherIdAndAcademicYearId(
         String departmentId, String teacherId,
         String academicYearId) {
-        return teachersLoadMapper.entityToDto(
-            teachersLoadRepository.findByDepartmentIdAndTeacherIdAndAcademicYearId(
+        return teachersLoadMapper.entitiesToDtos(
+            teachersLoadRepository.findAllByDepartmentIdAndTeacherIdAndAcademicYearId(
                 departmentId, teacherId, academicYearId));
+    }
+
+    @Override public List<TeachersLoadDTO> getAllTeachersLoads() {
+        return teachersLoadMapper.entitiesToDtos(
+            teachersLoadRepository.findAll());
     }
 
     private void checkThatTeachersLoadExists(String id) {

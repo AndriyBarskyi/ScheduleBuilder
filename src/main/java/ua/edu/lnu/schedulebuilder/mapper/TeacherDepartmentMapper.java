@@ -21,7 +21,7 @@ public interface TeacherDepartmentMapper {
 
     void updateTeacherDepartment(
         @MappingTarget TeacherDepartment teacherDepartmentFromDB,
-        TeacherDepartmentDTO newTeacherDepartment);
+        TeacherDepartmentSaveDTO newTeacherDepartment);
 
     @Mapping(target = "departmentDTO", source = "department")
     @Mapping(target = "teacherDTO", source = "teacher")

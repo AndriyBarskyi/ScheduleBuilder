@@ -64,6 +64,10 @@ public class TeacherServiceImpl implements TeacherService {
             teacherRepository.findAllByDepartmentId(departmentId));
     }
 
+    @Override public List<TeacherDTO> getAllTeachers() {
+        return teacherMapper.entitiesToDtos(teacherRepository.findAll());
+    }
+
     private void checkThatTeacherExists(String id) {
         if (!teacherRepository.existsById(id)) {
             throw new EntityNotExistsException(TEACHER_NOT_FOUND_BY_ID + id);
