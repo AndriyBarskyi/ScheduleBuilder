@@ -68,6 +68,12 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherMapper.entitiesToDtos(teacherRepository.findAll());
     }
 
+    @Override
+    public List<TeacherDTO> getAllTeachersByLessonId(String lessonId) {
+        return teacherMapper.entitiesToDtos(
+            teacherRepository.findAllByLessonId(lessonId));
+    }
+
     private void checkThatTeacherExists(String id) {
         if (!teacherRepository.existsById(id)) {
             throw new EntityNotExistsException(TEACHER_NOT_FOUND_BY_ID + id);

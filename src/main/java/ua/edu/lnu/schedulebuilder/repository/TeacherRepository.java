@@ -14,4 +14,8 @@ public interface TeacherRepository extends JpaRepository<Teacher, String> {
         + "WHERE td.department.id = ?1")
     List<Teacher> findAllByDepartmentId(String departmentId);
 
+    @Query("SELECT t FROM Teacher t "
+        + "JOIN t.teacherLessons tl "
+        + "WHERE tl.lesson.id = ?1")
+    List<Teacher> findAllByLessonId(String lessonId);
 }

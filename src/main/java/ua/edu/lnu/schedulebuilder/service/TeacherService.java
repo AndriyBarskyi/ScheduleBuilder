@@ -18,4 +18,6 @@ public interface TeacherService {
     List<TeacherDTO> getAllTeachersByDepartmentId(String departmentId);
 
     List<TeacherDTO> getAllTeachers();
+
+    List<TeacherDTO> getAllTeachersByLessonId(String lessonId);
 }

@@ -67,6 +67,14 @@ public class TeacherController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/lessons/{lessonId}")
+    public ResponseEntity<List<TeacherDTO>> getAllTeachersByLessonId(
+        @PathVariable String lessonId) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            teacherService.getAllTeachersByLessonId(lessonId));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
         return ResponseEntity.status(HttpStatus.OK).body(
